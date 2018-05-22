@@ -1,5 +1,15 @@
 #include <LiquidCrystal.h>
 #include <math.h>
+/*************************************************************/
+// Código  que monitorea tres sensores, muetra fecha y hora: //
+//  1.- Photoresistor                                        //
+//  2.- Thermoresistor                                       //
+//  3.- Sensor de Temp Digital                               //
+//  Cadena: {fecha,hora,sound,luz,temp,LED1}                 //
+/*************************************************************/
+
+//Crear el objeto LCD con los números correspondientes (rs, en, d4, d5, d6, d7)
+LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 
 double Thermister(int RawADC) {
   double Temp;
@@ -11,18 +21,34 @@ double Thermister(int RawADC) {
 
 // the setup routine runs once when you press reset:
 void setup() {
+  lcd.begin(16,2);
   Serial.begin(9600);
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
-/******** Variables ******************************************/
   int luz    = analogRead(A2);
   int sonido = analogRead(A0);
   int temp   = Thermister(analogRead(A1));
 
+/*********** MUESTREO por LCD *******************************/
+  // Cursor en la primera posición de la primera fila
+  lcd.setCursor(0,0);
+  lcd.print("sond");
+  lcd.setCursor(0,1);
+  lcd.print(sonido);
 
-/****** Muestreo por pantalla ********************************/
+  lcd.setCursor(6,0);
+  lcd.print("temp");  
+  lcd.setCursor(7,5);
+  lcd.print(temp);
+
+  lcd.setCursor(13,0);
+  lcd.print("luz");
+  lcd.setCursor(13,1);
+  lcd.print(luz);
+  
+/******* Muestreo de cadena *********************************/
   Serial.print(luz);Serial.print(";");
   Serial.print(sonido);Serial.print(";");
   Serial.print(temp);Serial.println(";");
