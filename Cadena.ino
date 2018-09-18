@@ -54,7 +54,8 @@ void loop() {
   lcd.print(luz);
   
 /******* Muestreo de cadena *********************************/
-  Serial.print("DD-MM-YY");Serial.print(";");Serial.print("Hra:min:seg");Serial.print(";");
+  Serial.print("DD-MM-YY");Serial.print(";");
+  Serial.print("Hra:min:seg");Serial.print(";");
   Serial.print(luz);Serial.print(";");
   Serial.print(sonido);Serial.print(";");
   Serial.print(temp);Serial.println(";");
