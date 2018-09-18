@@ -1,5 +1,6 @@
 #include <LiquidCrystal.h>
 #include <math.h>
+#include <time.h>
 /*************************************************************/
 // Código  que monitorea tres sensores, muetra fecha y hora: //
 //  1.- Photoresistor                                        //
@@ -7,6 +8,10 @@
 //  3.- Sensor de Temp Digital                               //
 //  Cadena: {fecha,hora,sound,luz,temp,LED1}                 //
 /*************************************************************/
+/*
+FUNCION PARA OBTENER LA FECHA EN MODO TEXTO
+Devuelve: DD-MM-AAAA HH:MM:SS
+*/
 
 //Crear el objeto LCD con los números correspondientes (rs, en, d4, d5, d6, d7)
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
@@ -49,6 +54,7 @@ void loop() {
   lcd.print(luz);
   
 /******* Muestreo de cadena *********************************/
+  Serial.print("DD-MM-YY");Serial.print(";");Serial.print("Hra:min:seg");Serial.print(";");
   Serial.print(luz);Serial.print(";");
   Serial.print(sonido);Serial.print(";");
   Serial.print(temp);Serial.println(";");
